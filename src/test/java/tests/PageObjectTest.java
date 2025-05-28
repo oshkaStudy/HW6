@@ -22,12 +22,16 @@ public class PageObjectTest extends TestBase {
         state = "Uttar Pradesh",
         city = "Agra";
 
+    //Вызов page-объектов
+    RegistrationPage registrationPage = new RegistrationPage();
+    ResultModalComponent resultModalComponent = new ResultModalComponent();
+
 
     //Все атрибуты, позитивный
     @Test
     void fillFormTest() {
 
-        new RegistrationPage()
+        registrationPage
                 .openPage()
                 .setFirstName(firstName)
                 .setLastName(lastName)
@@ -43,7 +47,7 @@ public class PageObjectTest extends TestBase {
                 .setCity(city)
                 .clickSubmit();
 
-        new ResultModalComponent()
+        resultModalComponent
                 .checkModalAppears()
                 .checkResult("Student Name", firstName + " " + lastName)
                 .checkResult("Student Email", email)
@@ -62,7 +66,7 @@ public class PageObjectTest extends TestBase {
     @Test
     void fillFormMinimalAttributesTest() {
 
-        new RegistrationPage()
+        registrationPage
                 .openPage()
                 .setFirstName(firstName)
                 .setLastName(lastName)
@@ -71,7 +75,7 @@ public class PageObjectTest extends TestBase {
                 .setUserNumber(number)
                 .clickSubmit();
 
-        new ResultModalComponent()
+        resultModalComponent
                 .checkModalAppears()
                 .checkResult("Student Name", firstName + " " + lastName)
                 .checkResult("Student Email", email)
@@ -84,7 +88,7 @@ public class PageObjectTest extends TestBase {
     @Test
     void fillFormNegativeTest() {
 
-        new RegistrationPage()
+        registrationPage
                 .openPage()
                 .setUserNumber(number)
                 .setDateOfBirth(dayOfBirth, monthOfBirth, yearOfBirth)
@@ -96,7 +100,7 @@ public class PageObjectTest extends TestBase {
                 .setCity(city)
                 .clickSubmit();
 
-        new ResultModalComponent()
+        resultModalComponent
                 .checkModalDoNotAppears();
 
     }
